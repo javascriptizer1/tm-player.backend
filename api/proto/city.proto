@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package city;
+
+option go_package = "github.com/javascriptizer1/tm-player.backend/pkg/gengrpc";
+
+
+service CityService {
+    rpc CreateCity(CreateCityRequest) returns (CreateCityResponse);
+    rpc UpdateCity(UpdateCityRequest) returns (UpdateCityResponse);
+    rpc GetCity(GetCityRequest) returns (GetCityResponse);
+    rpc GetListCities(GetListCitiesRequest) returns (GetListCitiesResponse);
+}
+
+message City {
+    string id = 1;
+    string name = 2;
+    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp updated_at = 4;
+}
+
+message CreateCityRequest {
+    string name = 1;
+}
+
+message CreateCityResponse {
+    string id = 1;
+}
+
+message UpdateCityRequest {
+    string id = 1;
+    string name = 2;
+}
+
+message UpdateCityResponse {
+    string id = 1;
+}
+
+message GetCityRequest {
+    string id = 1;
+}
+
+message GetCityResponse {
+    City city = 1;
+}
+
+message GetListCitiesRequest {
+    int64 limit = 1;
+    int64 page = 2;
+    repeated string ids = 3;
+}
+
+message GetListCitiesResponse {
+    repeated City cities = 1;
+    int64 total = 2;
+}

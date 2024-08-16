@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package player;
+
+option go_package = "github.com/javascriptizer1/tm-player.backend/pkg/gengrpc";
+
+
+service PlayerService {
+    rpc CreatePlayer(CreatePlayerRequest) returns (CreatePlayerResponse);
+    rpc UpdatePlayer(UpdatePlayerRequest) returns (UpdatePlayerResponse);
+    rpc GetPlayer(GetPlayerRequest) returns (GetPlayerResponse);
+    rpc GetListPlayers(GetListPlayersRequest) returns (GetListPlayersResponse);
+}
+
+enum ImpactLeg {
+    UNKNOWN = 0;
+    LEFT = 1;
+    RIGHT = 2;
+    BOTH = 3;
+}
+
+message PlayerPosition {
+    string id = 1;
+    string name = 2;
+    bool main = 3;
+}
+
+message UpdatePlayerPosition {
+    string id = 1;
+    bool main = 2;
+}
+
+message Player {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string middle_name = 4;
+    google.protobuf.Timestamp birthday = 5;
+    string photo = 6;
+    string city_id = 7;
+    repeated PlayerPosition positions = 8;
+    int64 height = 9;
+    ImpactLeg impact_leg = 10;
+    int64 market_value = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+}
+
+message CreatePlayerRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string middle_name = 3;
+    google.protobuf.Timestamp birthday = 4;
+    string photo = 5;
+    string city_id = 6;
+    repeated UpdatePlayerPosition positions = 7;
+    int64 height = 8;
+    ImpactLeg impact_leg = 9;
+}
+
+message CreatePlayerResponse {
+    string id = 1;
+}
+
+message UpdatePlayerRequest {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string middle_name = 4;
+    google.protobuf.Timestamp birthday = 5;
+    string photo = 6;
+    string city_id = 7;
+    repeated UpdatePlayerPosition positions = 8;
+    int64 height = 9;
+    ImpactLeg impact_leg = 10;
+}
+
+message UpdatePlayerResponse {
+    string id = 1;
+}
+
+message GetPlayerRequest {
+    string id = 1;
+}
+
+message GetPlayerResponse {
+    Player player = 1;
+}
+
+message GetListPlayersRequest {
+    string team_id = 1;
+    string city_id = 2;
+    string position_id = 3;
+    int64 min_age = 4;
+    int64 max_age = 5;
+    int64 limit = 6;
+    int64 page = 7;
+    repeated string ids = 8;
+}
+
+message GetListPlayersResponse {
+    repeated Player players = 1;
+    int64 total = 2;
+}
