@@ -6,7 +6,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/javascriptizer1/tm-player.backend/internal/config"
 	"github.com/javascriptizer1/tm-player.backend/internal/delivery/grpc"
-	repository "github.com/javascriptizer1/tm-player.backend/internal/repository/posgres"
+	repository "github.com/javascriptizer1/tm-player.backend/internal/repository/postgres"
 	"github.com/javascriptizer1/tm-player.backend/internal/service"
 	"github.com/javascriptizer1/tm-player.backend/pkg/gensqlc"
 	"github.com/javascriptizer1/tm-shared.backend/closer"
